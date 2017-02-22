@@ -47,7 +47,7 @@ matrix:
           packages:
             - clang-3.7
       env:
-        - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7"
+        - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7 && SCAN=scan-build-3.7"
 
     - os: linux
       addons:
@@ -80,7 +80,7 @@ matrix:
           packages:
             - clang-3.9
       env:
-        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"
+        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9 && SCAN=scan-build-3.9"
 
     - os: linux
       dist: trusty
@@ -91,7 +91,7 @@ matrix:
           packages:
             - clang-3.9
       env:
-        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"
+        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9 && SCAN=scan-build-3.9"
 
     - os: linux
       dist: trusty
@@ -102,7 +102,7 @@ matrix:
           packages:
             - clang-4.0
       env:
-        - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
+        - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0 && SCAN=scan-build-4.0"
 
     - os: linux
       dist: trusty
@@ -113,17 +113,19 @@ matrix:
           packages:
             - clang-5.0
       env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0 && SCAN=scan-build-5.0"
 
     - os: linux
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.9
           packages:
             - g++-4.9
+            - clang-3.9
       env:
-         - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+         - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9 && SCAN=scan-build-3.9"
 
     - os: linux
       dist: trusty
@@ -131,20 +133,23 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty
           packages:
             - g++-4.9
+            - clang-5.0
       env:
-         - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+         - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9 && SCAN=scan-build-5.0"
 
     - os: linux
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.9
           packages:
             - g++-5
       env:
-         - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
+         - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5 && SCAN=scan-build-3.9"
 
     - os: linux
       dist: trusty
@@ -152,20 +157,22 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty
           packages:
             - g++-5
       env:
-         - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
+         - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5 && SCAN=scan-build-5.0"
 
     - os: linux
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.9
           packages:
             - g++-6
       env:
-         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6 && SCAN=scan-build-3.9"
 
     - os: linux
       dist: trusty
@@ -173,10 +180,11 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty
           packages:
             - g++-6
       env:
-         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6 && SCAN=scan-build-5.0"
 
     - os: osx
       fail_allowed: true
