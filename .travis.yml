@@ -217,8 +217,8 @@ before_install:
     true
 
 script:
-  - ${CC} -std=c11 main.c -o c-bin
-  - ${CXX} -std=c++11 main.cpp -o cpp-bin
+  - ${CC} main.c -o c-bin
+  - ${CXX} main.cpp -o cpp-bin
 
 after_success:
   - echo "Executing C binary:" && ./c-bin
