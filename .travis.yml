@@ -197,6 +197,7 @@ before_install:
 
   # report versions
   - |
+    echo "Expand this to see tooling versions..."
     cmake       --version
     gcc         --version
     g++         --version
