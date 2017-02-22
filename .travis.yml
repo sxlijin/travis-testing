@@ -113,6 +113,8 @@ matrix:
       dist: trusty
       addons:
         apt:
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
             - g++-4.9
       env:
@@ -132,6 +134,8 @@ matrix:
       dist: trusty
       addons:
         apt:
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
             - g++-5
       env:
@@ -151,6 +155,8 @@ matrix:
       dist: trusty
       addons:
         apt:
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
             - g++-6
       env:
