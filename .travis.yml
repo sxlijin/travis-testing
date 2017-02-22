@@ -3,6 +3,9 @@ sudo: false
 
 # https://github.com/travis-ci/apt-source-whitelist/blob/master/ubuntu.json
 
+env:
+  - TMP_DIR="$(mktemp -d)"
+
 matrix:
   allow_failures:
     - fail_allowed: true
@@ -15,7 +18,7 @@ matrix:
             - gcc
             - clang
       env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++ && SCAN=scan-build"
+        - MATRIX_EVAL="CC=gcc && CXX=g++"
       fail_allowed: true
 
     - os: linux
@@ -24,7 +27,7 @@ matrix:
           packages:
             - clang
       env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++ && SCAN=scan-build"
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
       fail_allowed: true
 
     - os: linux
@@ -36,7 +39,7 @@ matrix:
           packages:
             - clang-3.6
       env:
-        - MATRIX_EVAL="CC=clang-3.6 && CXX=clang++-3.6 && SCAN=scan-build-3.6"
+        - MATRIX_EVAL="CC=clang && CXX=clang++ && V=3.6"
 
     - os: linux
       addons:
@@ -47,7 +50,7 @@ matrix:
           packages:
             - clang-3.7
       env:
-        - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7 && SCAN=scan-build-3.7"
+        - MATRIX_EVAL="CC=clang && CXX=clang++ && V=3.7"
 
     - os: linux
       addons:
@@ -58,7 +61,7 @@ matrix:
           packages:
             - clang-3.8
       env:
-        - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8 && SCAN=scan-build-3.8"
+        - MATRIX_EVAL="CC=clang && CXX=clang++ && V=3.8"
 
     - os: linux
       dist: trusty
@@ -69,7 +72,7 @@ matrix:
           packages:
             - clang-3.8
       env:
-        - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8 && SCAN=scan-build-3.8"
+        - MATRIX_EVAL="CC=clang && CXX=clang++ && V=3.8"
 
     - os: linux
       addons:
@@ -80,7 +83,7 @@ matrix:
           packages:
             - clang-3.9
       env:
-        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9 && SCAN=scan-build-3.9"
+        - MATRIX_EVAL="CC=clang && CXX=clang++ && V=3.9"
 
     - os: linux
       dist: trusty
@@ -91,7 +94,7 @@ matrix:
           packages:
             - clang-3.9
       env:
-        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9 && SCAN=scan-build-3.9"
+        - MATRIX_EVAL="CC=clang && CXX=clang++ && V=3.9"
 
     - os: linux
       dist: trusty
@@ -102,7 +105,7 @@ matrix:
           packages:
             - clang-4.0
       env:
-        - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0 && SCAN=scan-build-4.0"
+        - MATRIX_EVAL="CC=clang && CXX=clang++ && V=4.0"
 
     - os: linux
       dist: trusty
@@ -113,7 +116,7 @@ matrix:
           packages:
             - clang-5.0
       env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0 && SCAN=scan-build-5.0"
+        - MATRIX_EVAL="CC=clang && CXX=clang++ && V=5.0"
 
     - os: linux
       addons:
@@ -125,7 +128,7 @@ matrix:
             - g++-4.9
             - clang-3.9
       env:
-         - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9 && SCAN=scan-build-3.9"
+         - MATRIX_EVAL="CC=gcc && CXX=g++ && V=4.9 && SCAN_V=3.9"
 
     - os: linux
       dist: trusty
@@ -138,7 +141,7 @@ matrix:
             - g++-4.9
             - clang-5.0
       env:
-         - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9 && SCAN=scan-build-5.0"
+         - MATRIX_EVAL="CC=gcc && CXX=g++ && V=4.9 && SCAN_V=5.0"
 
     - os: linux
       addons:
@@ -149,7 +152,7 @@ matrix:
           packages:
             - g++-5
       env:
-         - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5 && SCAN=scan-build-3.9"
+         - MATRIX_EVAL="CC=gcc && CXX=g++ && V=4.9 && SCAN_V=3.9"
 
     - os: linux
       dist: trusty
@@ -161,7 +164,7 @@ matrix:
           packages:
             - g++-5
       env:
-         - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5 && SCAN=scan-build-5.0"
+         - MATRIX_EVAL="CC=gcc && CXX=g++ && V=5 && SCAN_V=5.0"
 
     - os: linux
       addons:
@@ -172,7 +175,7 @@ matrix:
           packages:
             - g++-6
       env:
-         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6 && SCAN=scan-build-3.9"
+         - MATRIX_EVAL="CC=gcc && CXX=g++ && V=6 && SCAN_V=3.9"
 
     - os: linux
       dist: trusty
@@ -184,7 +187,7 @@ matrix:
           packages:
             - g++-6
       env:
-         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6 && SCAN=scan-build-5.0"
+         - MATRIX_EVAL="CC=gcc && CXX=g++ && V=6 && SCAN_V=5.0"
 
     - os: osx
       fail_allowed: true
@@ -192,21 +195,29 @@ matrix:
     - os: osx
       osx_image: xcode8
       env:
-        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+        - MATRIX_EVAL="CC=gcc && CXX=g++ && V=4.9"
 
     - os: osx
       osx_image: xcode8
       env:
-        - MATRIX_EVAL="brew install gcc5 && CC=gcc-5 && CXX=g++-5"
+        - MATRIX_EVAL="brew install gcc5 && CC=gcc && CXX=g++ && V=5"
 
     - os: osx
       osx_image: xcode8
       env:
-        - MATRIX_EVAL="brew install gcc && CC=gcc-6 && CXX=g++-6"
+        - MATRIX_EVAL="brew install gcc && CC=gcc && CXX=g++ && V=6"
 
 before_install:
   # update envvar config
-  - eval ${MATRIX_EVAL}
+  - |
+    echo "Setting envvars..."
+    eval ${MATRIX_EVAL}
+    function get_v     { test -v V      && echo -${V}; }
+    function get_scanv { test -v SCAN_V && echo -${SCAN_V} || get_v; }
+    CC="${CC}$(  get_v)"
+    CXX="${CXX}$(get_v)"
+    SCAN_BUILD="scan-build$(get_scanv)"
+    SCAN_VIEW="scan-view$(get_scanv)"
 
   # report versions
   - |
@@ -233,8 +244,8 @@ before_install:
 script:
   - ${CC} main.c -o c-bin
   - ${CXX} main.cpp -o cpp-bin
-  - ${SCAN} ${CC} main.c -o c-bin
-  - ${SCAN} ${CXX} main.cpp -o cpp-bin
+  - ${SCAN_BUILD} -o ${TMP_DIR} ${CC} main.c -o c-bin && ${SCAN_VIEW} ${TMP_DIR}
+  - ${SCAN_BUILD} -o ${TMP_DIR} ${CXX} main.cpp -o cpp-bin && ${SCAN_VIEW} ${TMP_DIR}
 
 after_success:
   - echo "Executing C binary:" && ./c-bin
