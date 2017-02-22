@@ -9,6 +9,17 @@ matrix:
 
   include:
     - os: linux
+      addons:
+        apt:
+          packages:
+            - gcc
+      fail_allowed: true
+
+    - os: linux
+      addons:
+        apt:
+          packages:
+            - clang
       fail_allowed: true
 
     - os: linux
