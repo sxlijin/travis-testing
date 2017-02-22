@@ -1,5 +1,4 @@
 language: cpp
-dist: trusty
 sudo: false
 
 # https://github.com/travis-ci/apt-source-whitelist/blob/master/ubuntu.json
