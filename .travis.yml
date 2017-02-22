@@ -111,6 +111,7 @@ matrix:
         - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
 
     - os: linux
+      dist: trusty
       addons:
         apt:
           sources:
