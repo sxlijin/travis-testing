@@ -220,6 +220,8 @@ before_install:
 script:
   - ${CC} main.c -o c-bin
   - ${CXX} main.cpp -o cpp-bin
+  - scan-build ${CC} main.c -o c-bin
+  - scan-build ${CXX} main.cpp -o cpp-bin
 
 after_success:
   - echo "Executing C binary:" && ./c-bin
