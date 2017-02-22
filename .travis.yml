@@ -13,6 +13,9 @@ matrix:
         apt:
           packages:
             - gcc
+            - clang
+      env:
+        - MATRIX_EVAL="CC=gcc && CXX=g++ && SCAN=scan-build"
       fail_allowed: true
 
     - os: linux
@@ -20,6 +23,8 @@ matrix:
         apt:
           packages:
             - clang
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++ && SCAN=scan-build"
       fail_allowed: true
 
     - os: linux
@@ -31,7 +36,7 @@ matrix:
           packages:
             - clang-3.6
       env:
-        - MATRIX_EVAL="CC=clang-3.6 && CXX=clang++-3.6"
+        - MATRIX_EVAL="CC=clang-3.6 && CXX=clang++-3.6 && SCAN=scan-build-3.6"
 
     - os: linux
       addons:
@@ -53,7 +58,7 @@ matrix:
           packages:
             - clang-3.8
       env:
-        - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8"
+        - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8 && SCAN=scan-build-3.8"
 
     - os: linux
       dist: trusty
@@ -64,7 +69,7 @@ matrix:
           packages:
             - clang-3.8
       env:
-        - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8"
+        - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8 && SCAN=scan-build-3.8"
 
     - os: linux
       addons:
@@ -220,8 +225,8 @@ before_install:
 script:
   - ${CC} main.c -o c-bin
   - ${CXX} main.cpp -o cpp-bin
-  - scan-build ${CC} main.c -o c-bin
-  - scan-build ${CXX} main.cpp -o cpp-bin
+  - ${SCAN} ${CC} main.c -o c-bin
+  - ${SCAN} ${CXX} main.cpp -o cpp-bin
 
 after_success:
   - echo "Executing C binary:" && ./c-bin
