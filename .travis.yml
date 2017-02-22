@@ -3,9 +3,6 @@ sudo: false
 
 # https://github.com/travis-ci/apt-source-whitelist/blob/master/ubuntu.json
 
-env:
-  - TMP_DIR="$(mktemp -d)"
-
 matrix:
   allow_failures:
     - fail_allowed: true
@@ -218,6 +215,7 @@ before_install:
     CXX="${CXX}$(get_v)"
     SCAN_BUILD="scan-build$(get_scanv)"
     SCAN_VIEW="scan-view$(get_scanv)"
+    TMP_DIR="$(mktemp -d)"
 
   # report versions
   - |
