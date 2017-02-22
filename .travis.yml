@@ -212,7 +212,7 @@ before_install:
   - |
     echo "Setting envvars..."
     eval ${MATRIX_EVAL}
-    function get_v     { test -v V      && echo -${V}; }
+    function get_v     { test -v V      && echo -${V} || true; }
     function get_scanv { test -v SCAN_V && echo -${SCAN_V} || get_v; }
     CC="${CC}$(  get_v)"
     CXX="${CXX}$(get_v)"
