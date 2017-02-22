@@ -234,8 +234,8 @@ before_install:
 script:
   - ${CC} main.c -o c-bin
   - ${CXX} main.cpp -o cpp-bin
-  - ${SCAN_BUILD} -o ${TMP_DIR} ${CC} main.c -o c-bin && ${SCAN_VIEW} ${TMP_DIR}
-  - ${SCAN_BUILD} -o ${TMP_DIR} ${CXX} main.cpp -o cpp-bin && ${SCAN_VIEW} ${TMP_DIR}
+  - ${SCAN_BUILD} ${CC} main.c -o c-bin
+  - ${SCAN_BUILD} ${CXX} main.cpp -o cpp-bin
 
 after_success:
   - echo "Executing C binary:" && ./c-bin
