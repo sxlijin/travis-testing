@@ -139,7 +139,7 @@ before_install:
   - eval ${MATRIX_EVAL}
 
   # report versions
-  - >
+  - |
     cmake       --version
     gcc         --version
     g++         --version
