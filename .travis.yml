@@ -222,21 +222,11 @@ before_install:
   # report versions
   - |
     echo "Expand this to see tooling versions..."
-    cmake       --version
-    gcc         --version
-    g++         --version
-    gcc-4.4     --version
-    g++-4.4     --version
-    gcc-4.5     --version
-    g++-4.5     --version
-    gcc-4.6     --version
-    g++-4.6     --version
-    gcc-4.7     --version
-    g++-4.7     --version
-    clang       --version
-    clang++     --version
-    clang-3.4   --version
-    clang++-3.4 --version
+    echo "CC: ${CC}"
+    echo "CXX: ${CXX}"
+    echo "SCAN_BUILD: ${SCAN_BUILD}"
+    echo "SCAN_VIEW: ${SCAN_VIEW}"
+    echo "TMP_DIR: ${TMP_DIR}"
     $CC         --version
     $CXX        --version
     true
